@@ -18,6 +18,16 @@
   <title></title>
 </head>
 <body>
+  <nav>
+    <ul>
+      <% if logged_in? %>
+        <li>Welcome, <%= current_user.first_name %></li>
+        <li><a href="/logout">Logout</a></li>
+      <% else %>
+        <li>Please <a href="/login">login</a></li>
+      <% end %>
+    </ul>
+  </nav>
   <div id="main-container">
     <%= yield %>
   </div>
