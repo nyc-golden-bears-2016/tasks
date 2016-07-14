@@ -3,7 +3,7 @@ get '/' do
 end
 
 get '/tasks' do
-  @tasks = Task.all
+  @tasks = Task.order(:created_at)
   erb :'/tasks/index'
 end
 
@@ -19,4 +19,10 @@ post '/tasks' do
   else
     erb :'/tasks/new'
   end
+end
+
+put '/tasks/:id/toggle_complete' do
+  task = Task.find(params[:id])
+  task.toggle_completeness
+  redirect '/'
 end

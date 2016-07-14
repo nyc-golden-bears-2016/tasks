@@ -4,18 +4,17 @@
   <tr>
     <th>Status</th>
     <th>Task</th>
-    <th>Change status</th>
     <th>Edit</th>
   </tr>
   <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.completed ? "☑" : "☐" %></td>
-      <td><%= task.description %></td>
       <td>
-        <form method="POST" action="/tasks/toggle_complete">
-          <input type="submit" value="<%= task.completed ? "Uncheck" : "Check" %>">
+        <form method="POST" action="/tasks/<%= task.id %>/toggle_complete">
+          <input type="hidden" name="_method" value="PUT">
+          <input type="submit" value="<%= task.completed ? "☑" : "☐" %>">
         </form>
       </td>
+      <td><%= task.description %></td>
       <td><a href="/tasks/<%= task.id %>/edit">Edit description</a></td>
     </tr>
   <% end %>
