@@ -26,3 +26,18 @@ put '/tasks/:id/toggle_complete' do
   task.toggle_completeness
   redirect '/'
 end
+
+get '/tasks/:id/edit' do
+  @task = Task.find(params[:id])
+  erb :'/tasks/edit'
+end
+
+put '/tasks/:id' do
+  @task = Task.find(params[:id])
+  @task.assign_attributes(params[:task])
+  if @task.save
+    redirect '/'
+  else
+    erb :'/tasks/edit'
+  end
+end

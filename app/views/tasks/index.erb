@@ -1,5 +1,4 @@
 <h1>All your tasks</h1>
-<a href="/tasks/new">Add a new task</a>
 <table>
   <tr>
     <th>Status</th>
@@ -18,4 +17,7 @@
       <td><a href="/tasks/<%= task.id %>/edit">Edit description</a></td>
     </tr>
   <% end %>
+  <tr>
+    <td colspan="3"><a href="/tasks/new">Add a new task</a></td>
+  </tr>
 </table>

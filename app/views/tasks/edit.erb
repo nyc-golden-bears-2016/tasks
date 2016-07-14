@@ -1,0 +1,6 @@
+<h1>Edit task</h1>
+<form action="/tasks/<%= @task.id %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  <input type="text" name="task[description]" value="<%= @task.description %>">
+  <input type="submit" value="Update">
+</form>
