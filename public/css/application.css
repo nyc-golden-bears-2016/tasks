@@ -1,5 +1,15 @@
-table {
+#main-container {
   width: 60%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
   text-align: center;
 }
 
@@ -10,4 +20,3 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
   background-color: #EEFFFE;
 }
-
