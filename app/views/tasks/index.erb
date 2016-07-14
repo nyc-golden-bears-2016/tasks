@@ -9,7 +9,7 @@
   </tr>
   <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.completed ? "☐" : "☑" %></td>
+      <td><%= task.completed ? "☑" : "☐" %></td>
       <td><%= task.description %></td>
       <td>
         <form method="POST" action="/tasks/toggle_complete">

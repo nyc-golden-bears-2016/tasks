@@ -15,7 +15,7 @@ end
 post '/tasks' do
   @task = Task.new(params[:task])
   if @task.save
-    redirect "/tasks/#{@task.id}"
+    redirect "/tasks"
   else
     erb :'/tasks/new'
   end
