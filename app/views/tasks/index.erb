@@ -1,0 +1,22 @@
+<h1>All your tasks</h1>
+<a href="/tasks/new">Add a new task</a>
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Task</th>
+    <th>Change status</th>
+    <th>Edit</th>
+  </tr>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.completed ? "☐" : "☑" %></td>
+      <td><%= task.description %></td>
+      <td>
+        <form method="POST" action="/tasks/toggle_complete">
+          <input type="submit" value="<%= task.completed ? "Uncheck" : "Check" %>">
+        </form>
+      </td>
+      <td><a href="/tasks/<%= task.id %>/edit">Edit description</a></td>
+    </tr>
+  <% end %>
+</table>

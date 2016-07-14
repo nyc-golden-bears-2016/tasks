@@ -20,8 +20,3 @@ post '/tasks' do
     erb :'/tasks/new'
   end
 end
-
-get '/tasks/:id' do
-  @task = Task.find_by(id: params[:id])
-  erb :'/tasks/show'
-end
