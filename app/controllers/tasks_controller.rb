@@ -3,17 +3,22 @@ get '/' do
 end
 
 get '/tasks' do
-  @tasks = Task.order(:created_at)
+  redirect '/login' unless logged_in?
+  # @tasks = Task.where(user: current_user).order(:created_at)
+  @tasks = current_user.tasks.order(:created_at)
   erb :'/tasks/index'
 end
 
 get '/tasks/new' do
+  redirect '/login' unless logged_in?
   @task = Task.new
   erb :'/tasks/new'
 end
 
 post '/tasks' do
-  @task = Task.new(params[:task])
+  halt(401, "must be logged in. stop trying to hack us") unless logged_in?
+  @task = Task.new(params[:task].merge(user: current_user))
+  # @task.user = current_user
   if @task.save
     redirect "/tasks"
   else
@@ -23,17 +28,20 @@ end
 
 put '/tasks/:id/toggle_complete' do
   task = Task.find(params[:id])
+  halt(401, "you don't own this") unless @task.user == current_user
   task.toggle_completeness
   redirect '/'
 end
 
 get '/tasks/:id/edit' do
   @task = Task.find(params[:id])
+  halt(401, "you don't own this") unless @task.user == current_user
   erb :'/tasks/edit'
 end
 
 put '/tasks/:id' do
   @task = Task.find(params[:id])
+  halt(401, "you don't own this") unless @task.user == current_user
   @task.assign_attributes(params[:task])
   if @task.save
     redirect '/'
